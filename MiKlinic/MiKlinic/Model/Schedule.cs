@@ -35,7 +35,7 @@
             var slot = timeSlots.FirstOrDefault(s => s.Date == date && s.StartTime >= startTime && !s.IsBooked);
             if (slot != null)
             {
-                slot.IsBooked = true;
+                slot.Book();
             }
             else
             {
@@ -49,7 +49,7 @@
             {
                 if (!timeSlots[id].IsBooked)
                 {
-                    timeSlots[id].IsBooked = true;
+                    timeSlots[id].Book();
                 }
                 else
                 {

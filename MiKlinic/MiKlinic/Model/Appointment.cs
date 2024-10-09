@@ -2,6 +2,8 @@
 {
     public class Appointment
     {
+		private TimeSlot timeSlot;
+
 		public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot, string complaints, Diagnosis diagnosis, List<Analysis> analyses, List<Perscription> perscriptions, string otherInfo)
 		{
 			Patient = patient ?? throw new ArgumentNullException(nameof(patient));
@@ -16,8 +18,14 @@
 
 		public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
-        public TimeSlot TimeSlot { get; set; }
-        public string Complaints { get; set; }
+		public TimeSlot TimeSlot { get => timeSlot; 
+			set 
+			{ 
+				timeSlot = value;
+				timeSlot.Book();
+			}
+		}
+		public string Complaints { get; set; }
 		public Diagnosis Diagnosis { get; set; }
         public List<Analysis> Analyses { get; set; }
         public List<Perscription> Perscriptions { get; set; }
