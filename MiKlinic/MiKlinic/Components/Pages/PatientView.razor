@@ -1,0 +1,25 @@
+﻿@using Model
+
+@rendermode InteractiveAuto
+
+<div class="patient-view">
+	<h3>@(patient.Name)</h3>
+
+	<p>Contact Phone: @patient.ContactPhone</p>
+	<p>Insurance Number: @patient.InsuranceNumber</p>
+	<a href="/patients/@patient.InsuranceNumber" class="btn btn-primary" @onclick="OpenPatientRecord">Open record</a>
+</div>
+
+@code {
+	[Parameter]
+	public required Patient patient { get; set; }
+
+	[Inject]
+	public required NavigationManager Navigation { get; set; }
+
+	public void OpenPatientRecord()
+	{
+		Console.WriteLine("navigating to " + patient.InsuranceNumber);
+		Navigation.NavigateTo($"/patients/{patient.InsuranceNumber}");
+	}
+}
