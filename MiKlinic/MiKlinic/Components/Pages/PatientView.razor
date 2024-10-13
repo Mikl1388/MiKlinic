@@ -1,6 +1,5 @@
 ﻿@using Model
-
-@rendermode InteractiveAuto
+@namespace MiKlinic.Components.Pages
 
 <div class="patient-view">
 	<h3>@(patient.Name)</h3>
@@ -9,6 +8,8 @@
 	<p>Insurance Number: @patient.InsuranceNumber</p>
 	<a href="/patients/@patient.InsuranceNumber" class="btn btn-primary" @onclick="OpenPatientRecord">Open record</a>
 </div>
+
+
 
 @code {
 	[Parameter]
