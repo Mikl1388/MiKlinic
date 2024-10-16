@@ -1,39 +1,40 @@
 ﻿@page "/patients/{Id}"
 
 @using Model
+@using Data
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext _context
+@attribute [StreamRendering]
 
+<PageTitle>@pageTitle</PageTitle>
 
-<PageTitle>@(patient.Name)</PageTitle>
+@if (patient != null)
+{
 
-<h1>@(patient.Name)</h1>
+	<h1>@(patient.Name)</h1>
 
-<p>Contact Phone: @patient.ContactPhone</p>
-<p>Insurance Number: @patient.InsuranceNumber</p>
+	<p>Contact Phone: @patient.ContactPhone</p>
+	<p>Insurance Number: @patient.InsuranceNumber</p>
+} 
+else
+{
+	<p>Loading...</p>
+}
 
 @code {
 	[Parameter]
 	public string Id { get; set; }
-	public List<Patient> Patients { get; set; }
 	private Patient patient;
+	private MedicalRecord medicalRecord;
+	private string pageTitle = "Loading...";
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
-		ulong id = ulong.Parse(Id);
-		// Example 1: Patient John Doe
-		var patient1 = new Patient("John Doe", "555-1234", 1234567890);
-
-		// Example 2: Patient Jane Smith
-		var patient2 = new Patient("Jane Smith", "555-5678", 9876543210);
-
-		// Example 3: Patient Alex Johnson
-		var patient3 = new Patient("Alex Johnson", "555-9012", 1122334455);
-
-		// Example 4: Patient Emily Davis
-		var patient4 = new Patient("Emily Davis", "555-8765", 3344556677);
-
-		// Example 5: Patient Michael Brown
-		var patient5 = new Patient("Michael Brown", "555-4321", 9988776655);
-		Patients = new List<Patient> { patient1, patient2, patient3, patient4, patient5 };
-		patient = Patients.FirstOrDefault<Patient>(p => p.InsuranceNumber == id) ?? throw new NullReferenceException();
+		await Task.Delay(500); //DELETE: For db testing
+		patient = await _context.Patients
+					.Include(p => p.MedicalRecord)
+					.SingleOrDefaultAsync(p => p.InsuranceNumber == Convert.ToUInt64(Id)) ?? throw new NullReferenceException($"Patient with ID {Id} has no MedicalRecord");
+		pageTitle = patient.Name;
+		medicalRecord = patient.MedicalRecord;
 	}
 }

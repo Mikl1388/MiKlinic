@@ -63,6 +63,7 @@ using MiKlinic.Client.Pages;
 using MiKlinic.Components;
 using MiKlinic.Components.Account;
 using MiKlinic.Data;
+using MiKlinic.Model;
 
 namespace MiKlinic
 {
@@ -90,7 +91,8 @@ namespace MiKlinic
                 .AddIdentityCookies();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+			builder.Services.AddDbContext<ApplicationDbContext>();
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -102,8 +104,28 @@ namespace MiKlinic
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //DELETE: For db testing
+			using (var scope = app.Services.CreateScope())
+			{
+				var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+				Console.WriteLine("yay snosim bazu");
+				Console.WriteLine("deleted " + dbContext.Database.EnsureDeleted());
+				Console.WriteLine("created " + dbContext.Database.EnsureCreated());
+
+		        var patient1 = new Patient("John Doe", "555-1234", 1234567890);
+				var patient2 = new Patient("Jane Smith", "555-5678", 9876543210);
+				var patient3 = new Patient("Alex Johnson", "555-9012", 1122334455);
+				var patient4 = new Patient("Emily Davis", "555-8765", 3344556677);
+				var patient5 = new Patient("Michael Brown", "555-4321", 9988776655);
+				List<Patient> _patients = new List<Patient> { patient1, patient2, patient3, patient4, patient5 };
+				dbContext.Add(new Diagnosis("A1", "illness"));
+				dbContext.Diagnoses.Add(new Diagnosis("A2", "death"));
+				dbContext.Patients.AddRange(_patients);
+				dbContext.SaveChanges();
+			}
+
+			// Configure the HTTP request pipeline.
+			if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
                 app.UseMigrationsEndPoint();

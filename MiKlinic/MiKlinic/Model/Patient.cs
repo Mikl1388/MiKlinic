@@ -1,4 +1,6 @@
-﻿namespace MiKlinic.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MiKlinic.Model
 {
     public class Patient : Person
     {
@@ -21,7 +23,7 @@
 
 		public string ContactPhone { get; set; }
         public List<Appointment> BookedAppointments { get; set; }
-        public ulong InsuranceNumber { get; set; }
+        [Key] public ulong InsuranceNumber { get; set; }
         public MedicalRecord MedicalRecord { get; set; }
 
         //TODO: Add methods idk xd

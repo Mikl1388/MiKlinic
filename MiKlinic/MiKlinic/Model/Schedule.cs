@@ -2,6 +2,10 @@
 {
     public class Schedule
     {
+        public int Id { get; set; }
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
+
         //DRAFT: schedule draft
         private List<TimeSlot> timeSlots;
 

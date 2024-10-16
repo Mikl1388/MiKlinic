@@ -7,7 +7,7 @@ namespace MiKlinic.Model
 		{
 			Name = name ?? throw new ArgumentNullException(nameof(name));
 		}
-
+		public int Id { get; set; }
 		public string Name { get; set; }
 	}
 }

@@ -1,8 +1,12 @@
 ﻿namespace MiKlinic.Model
 {
+
     public class TimeSlot
-    {
-        public DateOnly Date { get; set; }
+	{
+		public ulong Id { get; set; }
+        public int ScheduleId { get; set; }
+        public Schedule Schedule { get; set; }
+		public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
         public bool IsBooked { get; private set; }

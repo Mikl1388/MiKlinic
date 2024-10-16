@@ -3,6 +3,7 @@
     public class Perscription
     {
 
+
         public Perscription(int regionCode, MedicalInstitution institution, Doctor prescribingDoctor, Patient patient, DateTime issueDate, DateTime expirationDate, string perscriptionInf, bool isUrgent, string? privilegeInfo, string otherInfo)
         {
             RegionCode = regionCode;
@@ -17,7 +18,12 @@
             OtherInfo = otherInfo;
         }
 
-        public int RegionCode { get; set; }
+		public Perscription()
+		{
+		}
+
+        public int Id { get; set; }
+		public int RegionCode { get; set; }
         public MedicalInstitution Institution { get; set; }
         public Doctor PrescribingDoctor
         {
