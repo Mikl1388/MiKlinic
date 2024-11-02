@@ -1,10 +1,10 @@
 ﻿namespace MiKlinic.Model
 {
-    public class Perscription
+    public class Prescription
     {
 
 
-        public Perscription(int regionCode, MedicalInstitution institution, Doctor prescribingDoctor, Patient patient, DateTime issueDate, DateTime expirationDate, string perscriptionInf, bool isUrgent, string? privilegeInfo, string otherInfo)
+        public Prescription(int regionCode, MedicalInstitution institution, Doctor prescribingDoctor, Patient patient, DateTime issueDate, DateTime expirationDate, string perscriptionInf, bool isUrgent, string? privilegeInfo, string otherInfo)
         {
             RegionCode = regionCode;
             Institution = institution ?? throw new ArgumentNullException(nameof(institution));
@@ -18,7 +18,7 @@
             OtherInfo = otherInfo;
         }
 
-		public Perscription()
+		public Prescription()
 		{
 		}
 

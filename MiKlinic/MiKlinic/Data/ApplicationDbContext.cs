@@ -20,7 +20,7 @@ namespace MiKlinic.Data
         public DbSet<Laboratory> Laboratories => Set<Laboratory>();
         public DbSet<MedicalInstitution> MedicalInstitutions => Set<MedicalInstitution>();
         public DbSet<MedicalRecord> MedicalRecords => Set<MedicalRecord>();
-        public DbSet<Perscription> Perscriptions => Set<Perscription>();
+        public DbSet<Prescription> Perscriptions => Set<Prescription>();
         public DbSet<Schedule> Schedules => Set<Schedule>();
         public DbSet<TimeSlot> TimeSlots => Set<TimeSlot>();
         public DbSet<Speciality> Specialities => Set<Speciality>();

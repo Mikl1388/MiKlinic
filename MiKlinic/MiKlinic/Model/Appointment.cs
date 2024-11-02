@@ -5,7 +5,7 @@
 		private TimeSlot timeSlot;
 
 		public Appointment() {}
-		public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot, string complaints, Diagnosis diagnosis, List<Analysis> analyses, List<Perscription> perscriptions, string otherInfo)
+		public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot, string complaints, Diagnosis diagnosis, List<Analysis> analyses, List<Prescription> perscriptions, string otherInfo)
 		{
 			Patient = patient ?? throw new ArgumentNullException(nameof(patient));
 			Doctor = doctor ?? throw new ArgumentNullException(nameof(doctor));
@@ -30,7 +30,7 @@
 		public string Complaints { get; set; }
 		public Diagnosis Diagnosis { get; set; }
         public List<Analysis> Analyses { get; set; }
-        public List<Perscription> Perscriptions { get; set; }
+        public List<Prescription> Perscriptions { get; set; }
         public string OtherInfo { get; set; } //SUS: mb divide in more fields
 
         public void NotifyPatient()
