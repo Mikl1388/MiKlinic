@@ -2,8 +2,6 @@
 {
     public class Prescription
     {
-
-
         public Prescription(int regionCode, MedicalInstitution institution, Doctor prescribingDoctor, Patient patient, DateTime issueDate, DateTime expirationDate, string perscriptionInf, bool isUrgent, string? privilegeInfo, string otherInfo)
         {
             RegionCode = regionCode;

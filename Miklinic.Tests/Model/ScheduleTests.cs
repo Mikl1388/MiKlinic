@@ -1,10 +1,4 @@
 ﻿using MiKlinic.Model;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Miklinic.Tests.Model
 {
@@ -14,6 +8,7 @@ namespace Miklinic.Tests.Model
 
 		public ScheduleTests()
 		{
+			// Создание тестируемого объекта. Заполнение его данными
 			_schedule = new Schedule();
 			_schedule.timeSlots.Add(new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 00), new TimeOnly(16, 00)));
 			_schedule.timeSlots.Add(new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(17, 00), new TimeOnly(17, 45)));
@@ -24,7 +19,7 @@ namespace Miklinic.Tests.Model
 		public void IsOverlapping_False()
 		{
 			var newSlot = new TimeSlot(new DateOnly(2000, 10, 20), new TimeOnly(15, 00), new TimeOnly(16, 00)); // Не пересекается ни с одним существующим
-			
+
 			var result = _schedule.IsOverlapping(newSlot);
 
 			Assert.False(result);

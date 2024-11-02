@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MiKlinic.Data;
 using MiKlinic.Model;
-using Xunit;
 
 namespace Miklinic.Tests
 {
