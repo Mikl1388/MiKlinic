@@ -25,10 +25,15 @@ namespace MiKlinic.Data
         public DbSet<TimeSlot> TimeSlots => Set<TimeSlot>();
         public DbSet<Speciality> Specialities => Set<Speciality>();
 
-        public ApplicationDbContext()
-        {
+		public ApplicationDbContext()
+		{
 		}
-		
+
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+			: base(options)
+		{
+		}
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<MedicalRecord>()
@@ -43,13 +48,6 @@ namespace MiKlinic.Data
 			modelBuilder.Entity<Patient>()
 			   .HasIndex(p => p.InsuranceNumber)
 			   .IsUnique();
-		}
-
-		// FIXME: unsafe
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseNpgsql("Host=localhost;Database=Miklinic;Username=TestUser;Password=pass;Include Error Detail=true;");
-			optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
 		}
 	}
 }

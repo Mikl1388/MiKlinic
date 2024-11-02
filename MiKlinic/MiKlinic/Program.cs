@@ -59,6 +59,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MiKlinic.Client.Pages;
 using MiKlinic.Components;
 using MiKlinic.Components.Account;
@@ -92,7 +93,11 @@ namespace MiKlinic
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-			builder.Services.AddDbContext<ApplicationDbContext>();
+			builder.Services.AddDbContext<ApplicationDbContext>(
+                options => { 
+                    options.UseNpgsql("Host=localhost;Database=Miklinic;Username=TestUser;Password=pass;Include Error Detail=true;");
+                    options.LogTo(Console.WriteLine, LogLevel.Information);
+				});
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

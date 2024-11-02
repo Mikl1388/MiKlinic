@@ -13,7 +13,7 @@
         }
         public Speciality Speciality { get; set; }
         public int SpecialityId { get; set; }
-        public bool CanPrescribeMedication { get; set; }
+        public virtual bool CanPrescribeMedication { get; set; }
         public Schedule Schedule { get; private set; }
     }
 }
