@@ -13,6 +13,7 @@ namespace Miklinic.Tests
 
 		private ApplicationDbContext CreateTestDbContext()
 		{
+			// Создание нового подключения к тестовой базе данных
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
 				.UseNpgsql(_connectionString)
 				.LogTo(Console.WriteLine)
@@ -29,17 +30,20 @@ namespace Miklinic.Tests
 		{
 			using (var context = CreateTestDbContext())
 			{
-				context.Database.EnsureDeleted();
-				context.Database.EnsureCreated();
+				context.Database.EnsureDeleted(); // Удаление базы данных, чтобы удалить прошлые данные
+				context.Database.EnsureCreated(); // Создание базы данных вновь
 				var testAdress = new Adress("1", "1", "ул. Ленина", "Москва", "Москва", "Россия", "00000000");
 				var newPatient = new Patient("Валерий Селёдкин", "88005553535", "1234567890", testAdress);
-				context.Patients.Add(newPatient);
-				context.SaveChanges();
+				context.Patients.Add(newPatient); // Добавление нового пациента
+				context.SaveChanges(); // Сохранение изменений в БД
 			}
 
 			using (var context = CreateTestDbContext())
 			{
+				// Получение пациента из БД
 				var retrievedPatient = context.Patients.Include(p => p.Adress).FirstOrDefault(p => p.Name == "Валерий Селёдкин");
+
+				// Проверка значений, считанных из БД
 				Assert.NotNull(retrievedPatient);
 				Assert.Equal("Валерий Селёдкин", retrievedPatient.Name);
 				Assert.Equal("88005553535", retrievedPatient.ContactPhone);

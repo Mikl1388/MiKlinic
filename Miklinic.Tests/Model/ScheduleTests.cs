@@ -23,7 +23,7 @@ namespace Miklinic.Tests.Model
 		[Fact]
 		public void IsOverlapping_False()
 		{
-			var newSlot = new TimeSlot(new DateOnly(2000, 10, 20), new TimeOnly(15, 00), new TimeOnly(16, 00));
+			var newSlot = new TimeSlot(new DateOnly(2000, 10, 20), new TimeOnly(15, 00), new TimeOnly(16, 00)); // Не пересекается ни с одним существующим
 			
 			var result = _schedule.IsOverlapping(newSlot);
 
@@ -33,7 +33,7 @@ namespace Miklinic.Tests.Model
 		[Fact]
 		public void IsOverlapping_Partitially()
 		{
-			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 30), new TimeOnly(16, 30));
+			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 30), new TimeOnly(16, 30)); // Пересекается с одним из существующих
 
 			var result = _schedule.IsOverlapping(newSlot);
 
@@ -43,7 +43,7 @@ namespace Miklinic.Tests.Model
 		[Fact]
 		public void IsOverlapping_Contains()
 		{
-			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 10), new TimeOnly(15, 50));
+			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 10), new TimeOnly(15, 50)); // Полностью находится внутри другого
 
 			var result = _schedule.IsOverlapping(newSlot);
 
@@ -53,7 +53,7 @@ namespace Miklinic.Tests.Model
 		[Fact]
 		public void IsOverlapping_Two()
 		{
-			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 30), new TimeOnly(17, 10));
+			var newSlot = new TimeSlot(new DateOnly(2000, 10, 10), new TimeOnly(15, 30), new TimeOnly(17, 10)); // Пересекает сразу два других
 
 			var result = _schedule.IsOverlapping(newSlot);
 
