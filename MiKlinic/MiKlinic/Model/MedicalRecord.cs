@@ -13,7 +13,7 @@ namespace MiKlinic.Model
 		}
 		public int Id { get; set; }
 		public Patient Patient { get; set; }
-		public ulong PatientId { get; set; }
+		public int PatientId { get; set; }
         public List<Appointment> Appointments { get; set; }
         public string? DoctorNotes { get; set; }
     }

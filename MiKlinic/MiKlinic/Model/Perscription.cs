@@ -12,7 +12,7 @@
             Patient = patient ?? throw new ArgumentNullException(nameof(patient));
             IssueDate = issueDate;
             ExpirationDate = expirationDate;
-            PerscriptionInf = perscriptionInf ?? throw new ArgumentNullException(nameof(perscriptionInf));
+            PerscriptionInfo = perscriptionInf ?? throw new ArgumentNullException(nameof(perscriptionInf));
             IsUrgent = isUrgent;
             PrivilegeInfo = privilegeInfo;
             OtherInfo = otherInfo;
@@ -46,7 +46,7 @@
         public Patient Patient { get; set; }
         public DateTime IssueDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public string PerscriptionInf { get; set; }
+        public string PerscriptionInfo { get; set; }
         public bool IsUrgent { get; set; }
         public string? PrivilegeInfo { get; set; }
         public string? OtherInfo { get; set; }

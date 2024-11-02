@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiKlinic", "MiKlinic\MiKlin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiKlinic.Client", "MiKlinic\MiKlinic.Client\MiKlinic.Client.csproj", "{81F69091-0730-4963-8CDB-90FC9CC62995}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miklinic.Tests", "Miklinic.Tests\Miklinic.Tests.csproj", "{DE7C5F1B-3FF7-4363-9422-9C12D1F70F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{81F69091-0730-4963-8CDB-90FC9CC62995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F69091-0730-4963-8CDB-90FC9CC62995}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F69091-0730-4963-8CDB-90FC9CC62995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7C5F1B-3FF7-4363-9422-9C12D1F70F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7C5F1B-3FF7-4363-9422-9C12D1F70F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7C5F1B-3FF7-4363-9422-9C12D1F70F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7C5F1B-3FF7-4363-9422-9C12D1F70F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

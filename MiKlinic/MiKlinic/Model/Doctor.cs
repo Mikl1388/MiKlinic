@@ -1,20 +1,18 @@
 ﻿namespace MiKlinic.Model
 {
-    public class Doctor : Person
+    public class Doctor : User
     {
 		public Doctor() {}
 
 
 		//DRAFT: im not sure doctor
-		public Doctor(string name, int specializationId, bool canPrescribeMedication, Schedule schedule) : base(name)
+		public Doctor(string name, Speciality speciality, bool canPrescribeMedication) : base(name)
         {
-            SpecializationId = specializationId;
+            Speciality = speciality;
             CanPrescribeMedication = canPrescribeMedication;
-            Schedule = schedule ?? throw new ArgumentNullException(nameof(schedule));
         }
-
-        public int Id { get; set; }
-        public int SpecializationId { get; set; } //DB: idk how to store
+        public Speciality Speciality { get; set; }
+        public int SpecialityId { get; set; }
         public bool CanPrescribeMedication { get; set; }
         public Schedule Schedule { get; private set; }
     }

@@ -1,9 +1,12 @@
-﻿namespace MiKlinic.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MiKlinic.Model
 {
 
     public class TimeSlot
 	{
-		public ulong Id { get; set; }
+        [Key]
+		public long Id { get; set; }
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
 		public DateOnly Date { get; set; }

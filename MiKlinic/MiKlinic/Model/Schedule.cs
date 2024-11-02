@@ -7,10 +7,16 @@
         public Doctor Doctor { get; set; }
 
         //DRAFT: schedule draft
-        private List<TimeSlot> timeSlots;
+        public List<TimeSlot> timeSlots { get; set; }
 
-        public Schedule()
+		public Schedule()
+		{
+			timeSlots = new List<TimeSlot>();
+		}
+
+		public Schedule(Doctor doctor)
         {
+            Doctor = doctor;
             timeSlots = new List<TimeSlot>();
         }
 
@@ -67,7 +73,7 @@
         }
 
         // Check if a new time slot overlaps with existing ones
-        private bool IsOverlapping(TimeSlot newSlot)
+        public bool IsOverlapping(TimeSlot newSlot)
         {
             return timeSlots.Any(s => s.Date == newSlot.Date &&
                                       (newSlot.StartTime >= s.StartTime && newSlot.StartTime < s.EndTime ||

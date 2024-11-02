@@ -8,33 +8,73 @@
 
 <PageTitle>@pageTitle</PageTitle>
 
-@if (patient != null)
+@if (!error)
 {
-
-	<h1>@(patient.Name)</h1>
-
-	<p>Contact Phone: @patient.ContactPhone</p>
-	<p>Insurance Number: @patient.InsuranceNumber</p>
-} 
+	@if (patient != null)
+	{
+		<h1>@patient.Name</h1>
+		<p>Contact Phone: @patient.ContactPhone</p>
+		<p>Insurance Number: @patient.InsuranceNumber</p>
+		<p>Adress: @patient.Adress</p>
+		@if (medicalRecord != null)
+		{
+			<p>Medical Record ID: @medicalRecord.Id</p>
+		}
+		else
+		{
+			<p>No medical record found.</p>
+		}
+	}
+	else
+	{
+		<p>Loading...</p>
+	}
+}
 else
 {
-	<p>Loading...</p>
+	<h1 class="error">Error occurred</h1>
+	<p class="error-info">@info</p>
 }
 
 @code {
 	[Parameter]
 	public string Id { get; set; }
-	private Patient patient;
+
+	private Patient? patient;
 	private MedicalRecord medicalRecord;
 	private string pageTitle = "Loading...";
+	private string info = "Loading...";
+	private bool error = false;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await Task.Delay(500); //DELETE: For db testing
-		patient = await _context.Patients
-					.Include(p => p.MedicalRecord)
-					.SingleOrDefaultAsync(p => p.InsuranceNumber == Convert.ToUInt64(Id)) ?? throw new NullReferenceException($"Patient with ID {Id} has no MedicalRecord");
-		pageTitle = patient.Name;
-		medicalRecord = patient.MedicalRecord;
+		try
+		{
+			await Task.Delay(500); // DELETE: For testing purposes
+
+
+			patient = await _context.Patients
+							.Include(p => p.MedicalRecord)
+							.SingleOrDefaultAsync(p => p.InsuranceNumber == Id);
+
+			if (patient != null)
+			{
+				pageTitle = patient.Name;
+				medicalRecord = patient.MedicalRecord;
+			}
+			else
+			{
+				error = true;
+				pageTitle = "Patient Not Found";
+				info = pageTitle;
+			}
+
+		}
+		catch (Exception)
+		{
+			error = true;
+			pageTitle = "Error loading patient data";
+			info = pageTitle;
+		}
 	}
 }
