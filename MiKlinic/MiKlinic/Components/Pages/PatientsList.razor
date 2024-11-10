@@ -36,5 +36,11 @@
 	{
 		await Task.Delay(500); //DELETE: For db testing
 		Patients = await _context.Patients.ToListAsync();
+
+		NotificationMediator mediator = new NotificationMediator();
+		mediator.AddUser(Patients[0]);
+		mediator.AddUser(Patients[1]);
+		mediator.AddUser(Patients[2]);
+		mediator.NotifyAll(Patients[0], "Проверка системы уведомлений");
 	}
 }
